@@ -4,7 +4,7 @@ import ChatList from "../components/ChatList";
 
 export default function Home() {
 	return (
-		<div className="w-full h-full flex border border-slate-200 dark:">
+		<div className="w-full h-full flex border border-slate-200 dark:bg-black2">
 			<div className="h-full w-[380px] flex-shrink-0 rounded-tl border border-slate-200 overflow-hidden px-3 pt-3">
 				<div className="h-full w-full flex space-y-2 flex-col">
 					<div className="w-full h-14 flex justify-between space-x-5 items-center px-4 flex-shrink-0">
@@ -31,6 +31,7 @@ export default function Home() {
 						</ul>
 					</div>
 				</div>
+				<div className=""></div>
 			</div>
 		</div>
 	);

@@ -10,25 +10,31 @@ const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Chat = lazy(() => import("./pages/Chat"));
 const Status = lazy(() => import("./pages/Status"));
+const UserStatus = lazy(() => import("./pages/UserStatus"));
+const Call = lazy(() => import("./pages/Call"));
 
 let user = true;
 
 export default function App() {
-  return (
-    <Suspense fallback={<Fallback />}>
-      <Routes>
-        <Route element={<ProtectedRoute user={user} />}>
-          <Route element={<Navbar />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/chat/:chatId" element={<Chat />} />
-            <Route path="/status/:statusId" element={<Status />} />
-          </Route>
-        </Route>
-        <Route element={<ProtectedRoute user={!user} redirect={"/"} />}>
-          <Route path="/login" element={<Login />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
-  );
+	return (
+		<Suspense fallback={<Fallback />}>
+			<Routes>
+				<Route element={<ProtectedRoute user={user} />}>
+					<Route element={<Navbar />}>
+						<Route path="/" element={<Home />} />
+						<Route path="/chat/:chatId" element={<Chat />} />
+
+						<Route path="/call" element={<Call />} />
+            
+						<Route path="/status" element={<Status />} />
+						<Route path="/status/:statusId" element={<UserStatus />} />
+					</Route>
+				</Route>
+				<Route element={<ProtectedRoute user={!user} redirect={"/"} />}>
+					<Route path="/login" element={<Login />} />
+				</Route>
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</Suspense>
+	);
 }
