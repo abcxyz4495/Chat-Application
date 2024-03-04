@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build_frontend": "npm i --prefix client",
-    "build_backend": "npm i --prefix server",
+    "build_client": "npm i --prefix client",
+    "build_server": "npm i --prefix server",
+    "build_project": "npm i && npm i --prefix client && npm i --prefix server",
     "start_client": "npm run dev --prefix client",
     "start_server": "npm run dev --prefix server",
     "start": "concurrently \"npm start --prefix server\" \"npm run dev --prefix client\"",
