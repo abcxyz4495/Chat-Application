@@ -1,8 +1,19 @@
 import { IoLockClosedOutline } from "react-icons/io5";
 import { ImWhatsapp } from "react-icons/im";
+
+import { useNavigate } from "react-router-dom";
+
 import ChatList from "../components/specific/ChatList";
+import { useEffect } from "react";
 
 export default function Home() {
+	const from = location.state?.from?.pathname || "/";
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		navigate(from, { replace: true });
+	}, [from, navigate]);
+	
 	return (
 		<div className="w-full h-full flex border border-slate-200 dark:bg-black2">
 			<div className="h-full w-[380px] flex-shrink-0 rounded-tl border border-slate-200 overflow-hidden px-3 pt-3">

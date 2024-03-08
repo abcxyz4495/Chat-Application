@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Fallback from "./components/loaders/Fallback";
@@ -13,21 +13,16 @@ const Status = lazy(() => import("./pages/Status"));
 const UserStatus = lazy(() => import("./pages/UserStatus"));
 const Call = lazy(() => import("./pages/Call"));
 
-let user = true;
-
 export default function App() {
-	const memoizedHome = useMemo(() => <Home />, []);
-	
 	return (
 		<Suspense fallback={<Fallback />}>
 			<Routes>
-				<Route element={<ProtectedRoute user={user} />}>
+				<Route path="/login" element={<Login />} />
+
+				<Route element={<ProtectedRoute />}>
 					<Route element={<Navbar />}>
-						<Route path="/" element={memoizedHome} />
-						<Route
-							path="/chat/:chatId"
-							element={<Chat home={memoizedHome} />}
-						/>
+						<Route path="/" element={<Home />} />
+						<Route path="/chat/:chatId" element={<Chat />} />
 
 						<Route path="/call" element={<Call />} />
 
@@ -35,9 +30,7 @@ export default function App() {
 						<Route path="/status/:statusId" element={<UserStatus />} />
 					</Route>
 				</Route>
-				<Route element={<ProtectedRoute user={!user} redirect={"/"} />}>
-					<Route path="/login" element={<Login />} />
-				</Route>
+
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Suspense>

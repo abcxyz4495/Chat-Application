@@ -2,11 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+require("dotenv/config");
 
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const credentials = require("./middlewares/credentials");
 const connectDB = require("./configs/dbConnection");
-const corsOptions = require("./configs/corsOptions")
+const corsOptions = require("./configs/corsOptions");
 
 const PORT = process.env.PORT || 4000;
 const URL = process.env.MONGODB_URL || "";
@@ -21,6 +22,9 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/auth", require("./routes/auth.routes"));
+app.use("/user", require("./routes/user.routes"));
 
 app.use(errorMiddleware);
 
